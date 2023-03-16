@@ -40,14 +40,27 @@
 		<result column="good_rank" property="goodRank" />
 	</resultMap>
 	<select id="findRecommendGoods" parameterType="Map" resultMap="RecommendGoodsResultMap">
-		select r.good_id, t.goods_name,r.good_rank
-		from recommand_table AS r
-		join tb_newbee_mall_goods_info AS t
-		on r.good_id = t.goods_id
-		order by r.good_rank desc
-		limit 4
-	
+		  select r.good_id, t.goods_name, r.good_rank
+ 			 from recommand_table AS r
+  			join tb_newbee_mall_goods_info AS t on r.good_id = t.goods_id
+ 	 <where>
+   	 <if test="limit != null">
+      limit #{limit}
+    </if>
+  	</where>
+ 	 <choose>
+    <when test="orderBy == 'goodRankAsc'">
+      order by r.good_rank asc
+    </when>
+    <when test="orderBy == 'goodRankDesc'">
+      order by r.good_rank desc
+    </when>
+    <otherwise>
+      order by r.id asc
+    </otherwise>
+  </choose>
 </select>
+
 	<!--======================================================-->
 	<select id="getTotalIndexConfigs" parameterType="Map" resultType="int">
 		select count(*) from tb_newbee_mall_index_config

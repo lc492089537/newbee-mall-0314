@@ -15,10 +15,8 @@ import ltd.newbee.mall.service.FindRecommendGoodsService;
 public class FindRecommendGoodsController {
     
     @Autowired
-    private FindRecommendGoodsService findRecommendGoodsService;
-
-    
-  
+    private FindRecommendGoods findRecommendGoodsService;
+ 
     @GetMapping("/recommend-goods")
     public ModelAndView getRecommendGoods(@RequestParam(defaultValue= "8" ) Integer limit) {
         List<FindRecommendGoods> recommendGoodsList = findRecommendGoodsService.findRecommendGoods(limit);

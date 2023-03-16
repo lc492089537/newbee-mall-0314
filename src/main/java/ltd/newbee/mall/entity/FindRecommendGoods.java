@@ -22,7 +22,7 @@ public class FindRecommendGoods {
 	private Integer good_rank;
 	@Override
 	public String toString() {
-		return "RecommendGoodsResultMap [good_id=" + good_id + ", good_rank=" + good_rank + "]";
+		return "FindRecommendGoods [good_id=" + good_id + ", good_rank=" + good_rank + "]";
 	}
 	public List<FindRecommendGoods> findRecommendGoods(Integer limit) {
 		// TODO Auto-generated method stub

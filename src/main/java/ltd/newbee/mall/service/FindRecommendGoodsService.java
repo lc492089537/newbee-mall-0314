@@ -8,7 +8,7 @@ public interface FindRecommendGoodsService {
     /**
      * 查询推荐商品信息
      *
-     * @param limit 返回结果数量限制
+     * @paramlimit 返回结果数量限制
      * @return 推荐商品信息列表
      */
     List<FindRecommendGoods> findRecommendGoods(Integer limit);
