@@ -8,7 +8,9 @@
  */
 package ltd.newbee.mall.dao;
 
+import ltd.newbee.mall.entity.FindRecommendGoods;
 import ltd.newbee.mall.entity.IndexConfig;
+import ltd.newbee.mall.entity.FindRecommendGoods;
 import ltd.newbee.mall.util.PageQueryUtil;
 import org.apache.ibatis.annotations.Param;
 
@@ -30,6 +32,8 @@ public interface IndexConfigMapper {
     int updateByPrimaryKey(IndexConfig record);
 
     List<IndexConfig> findIndexConfigList(PageQueryUtil pageUtil);
+  
+    List<FindRecommendGoods> findRecommendGoods();
 
     int getTotalIndexConfigs(PageQueryUtil pageUtil);
 
