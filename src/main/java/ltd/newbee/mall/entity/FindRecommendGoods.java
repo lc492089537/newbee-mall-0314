@@ -1,31 +1,34 @@
 package ltd.newbee.mall.entity;
 
-import java.util.List;
-
 import org.springframework.stereotype.Component;
 
 @Component
 public class FindRecommendGoods {
-	private Integer good_id;    
-	public Integer getGood_id() {
-		return good_id;
+	private Integer goodId;
+	private String goodsName;
+	private Integer goodRank;
+	
+	public Integer getGoodId() {
+		return goodId;
 	}
-	public void setGood_id(Integer good_id) {
-		this.good_id = good_id;
+	public void setGoodId(Integer goodId) {
+		this.goodId = goodId;
 	}
-	public Integer getGood_rank() {
-		return good_rank;
+	public String getGoodsName() {
+		return goodsName;
 	}
-	public void setGood_rank(Integer good_rank) {
-		this.good_rank = good_rank;
+	public void setGoodsName(String goodsName) {
+		this.goodsName = goodsName;
 	}
-	private Integer good_rank;
+	public Integer getGoodRank() {
+		return goodRank;
+	}
+	public void setGoodRank(Integer goodRank) {
+		this.goodRank = goodRank;
+	}
 	@Override
 	public String toString() {
-		return "FindRecommendGoods [good_id=" + good_id + ", good_rank=" + good_rank + "]";
+		return "FindRecommendGoods [goodId=" + goodId + ", goodsName=" + goodsName + ", goodRank=" + goodRank + "]";
 	}
-	public List<FindRecommendGoods> findRecommendGoods(Integer limit) {
-		// TODO Auto-generated method stub
-		return null;
-	}  
+
 }

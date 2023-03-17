@@ -7,15 +7,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 @Transactional
 @Service
-public class FindRecommendGoodsServiceImpl implements FindRecommendGoodsService {
-	@Autowired(required = false)
-	private IndexConfigMapper findRecommendGoodsMapper1;
+public class FindRecommendGoodsServiceImpl implements FindRecommendGoodsService{
+    private final IndexConfigMapper findRecommendGoodsMapper;
 
-    @Override
-    public List<FindRecommendGoods> findRecommendGoods(Integer limit) {
-        return findRecommendGoodsMapper1.findRecommendGoods();
+    @Autowired
+    public FindRecommendGoodsServiceImpl(IndexConfigMapper findRecommendGoodsMapper) {
+        this.findRecommendGoodsMapper = findRecommendGoodsMapper;
+    }
+
+    public List<FindRecommendGoods> findRecommendGoods(Integer limit, String orderBy) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("limit", limit);
+        params.put("orderBy", orderBy);
+        return findRecommendGoodsMapper.findRecommendGoods(limit,orderBy);
     }
 }

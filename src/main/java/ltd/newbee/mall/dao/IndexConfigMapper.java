@@ -33,7 +33,7 @@ public interface IndexConfigMapper {
 
     List<IndexConfig> findIndexConfigList(PageQueryUtil pageUtil);
   
-    List<FindRecommendGoods> findRecommendGoods();
+    List<FindRecommendGoods> findRecommendGoods(Integer limit, String orderBy);
 
     int getTotalIndexConfigs(PageQueryUtil pageUtil);
 
