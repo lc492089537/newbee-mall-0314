@@ -10,11 +10,12 @@ package ltd.newbee.mall.dao;
 
 import ltd.newbee.mall.entity.FindRecommendGoods;
 import ltd.newbee.mall.entity.IndexConfig;
-import ltd.newbee.mall.entity.FindRecommendGoods;
+
 import ltd.newbee.mall.util.PageQueryUtil;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface IndexConfigMapper {
     int deleteByPrimaryKey(Long configId);
@@ -33,8 +34,8 @@ public interface IndexConfigMapper {
 
     List<IndexConfig> findIndexConfigList(PageQueryUtil pageUtil);
   
-    List<FindRecommendGoods> findRecommendGoods(Integer limit, String orderBy);
-
+    List<FindRecommendGoods> findRecommendGoods(Map<String, Object> params);
+    
     int getTotalIndexConfigs(PageQueryUtil pageUtil);
 
     int deleteBatch(Long[] ids);

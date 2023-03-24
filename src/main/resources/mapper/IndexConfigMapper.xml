@@ -36,33 +36,51 @@
 	<!--================================================-->
 	<!--1.函数名一致 2. 文件名一致 3.定义了一个resultMap 4.定义了新的entity 5.parameterType="Map"-->
 	<resultMap id="RecommendGoodsResultMap" type="ltd.newbee.mall.entity.FindRecommendGoods">
-		<id column="good_id" property="goodId" />
+		<id column="goods_id" property="goodId" />
 		<result column="goods_name" property="goodsName" />
-		<result column="good_rank" property="goodRank" />
+		<result column="selling_price_with_tax" property="intaxPrice" />
+		<result column="goods_cover_img" property="goodsCoverImg" />
+		<result column="goods_sell_status" property="goodsSellStatus" />
+		<result column="update_time" property="updateTime" />
 	</resultMap>
 	<select id="findRecommendGoods" parameterType="Map" resultMap="RecommendGoodsResultMap">
-		  select r.good_id, t.goods_name, r.good_rank
- 			 from recommand_table AS r
-  			join tb_newbee_mall_goods_info AS t on r.good_id = t.goods_id
-     <if test="orderBy != null and orderBy != ''">
-        <choose>
-            <when test="orderBy == 'goodRankAsc'">
-                order by r.good_rank asc
-            </when>
-            <when test="orderBy == 'goodRankDesc'">
-                order by r.good_rank desc
-            </when>
-            <otherwise>
-                order by r.id asc
-            </otherwise>
-        </choose>
-    </if>
-    <if test="limit != null">
+		select
+			 t.goods_id, 
+     		 concat(substring(t.goods_name, 1, 15), '...') AS goods_name,
+		    (t.selling_price * 1.1) AS selling_price_with_tax, -- 含税商品价格
+        	 t.goods_cover_img,
+     		  CASE t.goods_sell_status WHEN 1 THEN '在庫なし' WHEN 0 THEN '在库'  END AS goods_sell_status,
+     		 t.update_time,
+     		 r.is_deleted
+		from recommend_table AS r
+  			join tb_newbee_mall_goods_info AS t on r.goods_id = t.goods_id
+		WHERE 
+			r.is_deleted = 0 AND r.type = #{type} AND IF(r.is_deleted = 1, 0, 1) = 1	
+		<if test="orderBy != null and orderBy != ''">
+			<choose>
+				<when test="orderBy == 'priceAsc'"> 
+              ORDER BY selling_price_with_tax ASC 
+          </when>
+				<when test="orderBy == 'priceDesc'"> 
+              ORDER BY selling_price_with_tax DESC 
+          </when>
+				<when test="orderBy == 'updateTimeAsc'"> 
+              ORDER BY t.update_time ASC 
+          </when>
+				<when test="orderBy == 'updateTimeDesc'"> 
+              ORDER BY t.update_time DESC 
+          </when>
+				<otherwise> 
+              ORDER BY t.goods_name ASC -- 默认按商品名称排序 
+          </otherwise>
+			</choose>
+		</if>
+		<if test="limit != null">
         limit #{limit}
-    </if>  	
+    </if>
     
-</select>
-
+		
+	</select>
 	<!--======================================================-->
 	<select id="getTotalIndexConfigs" parameterType="Map" resultType="int">
 		select count(*) from tb_newbee_mall_index_config

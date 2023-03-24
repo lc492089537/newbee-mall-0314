@@ -13,17 +13,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class FindRecommendGoodsController {
 
-    private final FindRecommendGoodsService findRecommendGoodsService;
+	@Autowired
+	private final FindRecommendGoodsService findRecommendGoodsService;
 
-    @Autowired
-    public FindRecommendGoodsController(FindRecommendGoodsService findRecommendGoodsService) {
-        this.findRecommendGoodsService = findRecommendGoodsService;
-    }
+	public FindRecommendGoodsController(FindRecommendGoodsService findRecommendGoodsService) {
+		this.findRecommendGoodsService = findRecommendGoodsService;
+	}
 
-    @GetMapping("/recommend_goods")
-    @ResponseBody
-    public List<FindRecommendGoods> findRecommendGoods(@RequestParam(defaultValue = "10") Integer limit,
-                                                        @RequestParam(required = false) String orderBy) {
-        return findRecommendGoodsService.findRecommendGoods(limit, orderBy);
-    }
+	@GetMapping("/recommend_goods")
+	@ResponseBody
+	public List<FindRecommendGoods> findRecommendGoods(
+		@RequestParam(defaultValue = "10") Integer limit,
+		@RequestParam(defaultValue ="3") Integer type,
+		@RequestParam(defaultValue = "false") String orderBy) {
+		return findRecommendGoodsService.findRecommendGoods(type, orderBy,limit);
+	}
 }

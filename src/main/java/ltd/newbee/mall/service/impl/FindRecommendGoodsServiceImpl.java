@@ -1,30 +1,31 @@
 package ltd.newbee.mall.service.impl;
 
-import ltd.newbee.mall.dao.IndexConfigMapper;
-import ltd.newbee.mall.entity.FindRecommendGoods;
-import ltd.newbee.mall.service.FindRecommendGoodsService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Transactional
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import ltd.newbee.mall.dao.IndexConfigMapper;
+import ltd.newbee.mall.entity.FindRecommendGoods;
+import ltd.newbee.mall.service.FindRecommendGoodsService;
+
 @Service
-public class FindRecommendGoodsServiceImpl implements FindRecommendGoodsService{
-    private final IndexConfigMapper findRecommendGoodsMapper;
+public class FindRecommendGoodsServiceImpl implements FindRecommendGoodsService {
+    private IndexConfigMapper findRecommendGoods;
 
     @Autowired
-    public FindRecommendGoodsServiceImpl(IndexConfigMapper findRecommendGoodsMapper) {
-        this.findRecommendGoodsMapper = findRecommendGoodsMapper;
+    public FindRecommendGoodsServiceImpl(IndexConfigMapper findRecommendGoods) {
+        this.findRecommendGoods = findRecommendGoods;
     }
 
-    public List<FindRecommendGoods> findRecommendGoods(Integer limit, String orderBy) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("limit", limit);
-        params.put("orderBy", orderBy);
-        return findRecommendGoodsMapper.findRecommendGoods(limit,orderBy);
+    @Override
+    public List<FindRecommendGoods> findRecommendGoods(Integer type, String orderBy, Integer limit) {
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("type", type);
+        paramMap.put("orderBy", orderBy);
+        paramMap.put("limit", limit);
+        return findRecommendGoods.findRecommendGoods(paramMap);
     }
 }
