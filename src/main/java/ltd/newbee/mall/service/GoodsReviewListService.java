@@ -12,7 +12,7 @@ public interface GoodsReviewListService {
 	    
 	    int getGoodsReviewListLikeCount(int goodsId,String reviewId);
 	    int getGoodsReviewStarCount(Integer goodsId);
-	    int getGoodsReviewStarGrade(@Param("goodsId") Integer goodsId);
+	    int getGoodsReviewStarGrade(Integer goodsId);
 	    int getGoodsReviewContextCount(@Param("contextCount") Integer contextCount);
 
 

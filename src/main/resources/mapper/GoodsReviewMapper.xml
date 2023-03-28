@@ -18,37 +18,73 @@
 		<result column="review_image3" property="reviewImage3" />
 		<result column="review_image4" property="reviewImage4" />
 		<result column="review_image5" property="reviewImage5" />
+		<result column="pageNo" property="pageNo" />
 	</resultMap>
 	<!-- 获取商品问答列表 -->
 	<select id="getGoodsReviewList" resultMap="GoodsReviewListMapper">
-  	 SELECT g.goods_id, 
-  		 g.user_name,
-      	 g.review_id, 
-      	 g.review_rank, 
-      	 g.goods_name,
-      	 g.review_title,
-      	 g.review_content,
-      	 g.review_date,
-      	 g.review_image1,
-      	 g.review_image2,
-      	 g.review_image3,
-      	 g.review_image4,
-      	 g.review_image5,
-      	 COUNT(q.user_id) as likeCount
-	FROM review_table as g
-	LEFT JOIN review_like as q ON g.goods_id = q.goods_id AND g.review_id = q.review_id
-	WHERE g.goods_id = #{goodsId}
-	GROUP BY g.goods_id, user_name
-	ORDER BY 
-    CASE 
-        WHEN #{orderBy} = 'likeCount' THEN likeCount 
-        ELSE g.review_date 
-    END DESC,
-    g.review_id ASC
-	LIMIT #{offset}, #{pageSize}
+	
+	SELECT * FROM (
+    SELECT g.goods_id, 
+           g.user_name,
+           g.review_id, 
+           g.review_rank, 
+           g.goods_name,
+           g.review_title,
+           g.review_content,
+           g.review_date,
+           g.review_image1,
+           g.review_image2,
+           g.review_image3,
+           g.review_image4,
+           g.review_image5,
+           COUNT(q.user_id) as likeCount
+    FROM review_table as g
+    LEFT JOIN review_like as q ON g.goods_id = q.goods_id AND g.review_id = q.review_id
+    WHERE g.goods_id = #{goodsId}
+    GROUP BY g.goods_id, user_name
+    ORDER BY 
+        CASE 
+            WHEN #{orderBy} = 'likeCount' THEN likeCount 
+            ELSE g.review_date 
+        END DESC,
+        g.review_id ASC
+    LIMIT 3
+) AS t1
+	UNION
+
+	SELECT * FROM (
+    SELECT g.goods_id, 
+           g.user_name,
+           g.review_id, 
+           g.review_rank, 
+           g.goods_name,
+           g.review_title,
+           g.review_content,
+           g.review_date,
+           g.review_image1,
+           g.review_image2,
+           g.review_image3,
+           g.review_image4,
+           g.review_image5,
+           COUNT(q.user_id) as likeCount
+    FROM review_table as g
+    LEFT JOIN review_like as q ON g.goods_id = q.goods_id AND g.review_id = q.review_id
+    WHERE g.goods_id = #{goodsId}
+    GROUP BY g.goods_id, user_name
+    ORDER BY 
+        CASE 
+            WHEN #{orderBy} = 'likeCount' THEN likeCount 
+            ELSE g.review_date 
+        END DESC,
+        g.review_id ASC
+    LIMIT #{pageSize} OFFSET 3
+) AS t2
+	WHERE #{pageNo} > 1
+
 
    
-</select>
+
+	</select>
 	<!-- 获取商品评论点赞总数 -->
 	<select id="getGoodsReviewListLikeCount" resultType="java.lang.Integer">
   SELECT count(*)
@@ -65,7 +101,7 @@
 	<!-- 获取商品star总分数 -->
 	<select id="getGoodsReviewStarGrade" resultType="java.lang.Integer">
 	select 
-		(count(review_rank)) as starGrade
+		(sum(review_rank)) as starGrade
 	from review_table
 	WHERE goods_id = #{goodsId}
 </select>
@@ -77,5 +113,4 @@
 	WHERE goods_id = #{goodsId}
 		
 	</select>
-		
 </mapper>

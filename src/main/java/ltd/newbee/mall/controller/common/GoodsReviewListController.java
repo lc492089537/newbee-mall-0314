@@ -26,7 +26,7 @@ public class GoodsReviewListController {
 				@RequestParam(name = "sortCol", defaultValue = "reviewDate") String orderBy, 
 				String reviewId) {
 
-			int pageSize = 3;
+			int pageSize = 100;
 			List<GoodsReviewList> reviewList = goodsReviewListService.getGoodsReviewList(goodsId, orderBy, pageNo,
 					pageSize);
 			int starCount = goodsReviewListService.getGoodsReviewStarCount(goodsId);

@@ -17,6 +17,7 @@ public class GoodsReviewList {
   	private String reviewImage3;
     private String reviewImage4;
   	private String reviewImage5; 
+  	private int pageNo;
 
 	/**
 	 * @return the userName
@@ -207,6 +208,20 @@ public class GoodsReviewList {
 	 */
 	public void setReviewImage5(String reviewImage5) {
 		this.reviewImage5 = reviewImage5;
+	}
+
+	/**
+	 * @return the pageNo
+	 */
+	public int getPageNo() {
+		return pageNo;
+	}
+
+	/**
+	 * @param pageNo the pageNo to set
+	 */
+	public void setPageNo(int pageNo) {
+		this.pageNo = pageNo;
 	}
 
 

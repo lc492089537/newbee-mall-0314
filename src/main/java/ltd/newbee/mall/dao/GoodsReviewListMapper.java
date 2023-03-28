@@ -9,7 +9,7 @@ import ltd.newbee.mall.entity.GoodsReviewList;
 
 public interface GoodsReviewListMapper {
 	List<GoodsReviewList> getGoodsReviewList(@Param("goodsId") int goodsId, @Param("orderBy") String orderBy,
-			@Param("offset") int offset, @Param("pageSize") int pageSize);
+			 int pageNo, @Param("pageSize") int pageSize);
 
 	int getGoodsReviewListLikeCount(int goodsId, String reviewId);
 	

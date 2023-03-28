@@ -22,8 +22,8 @@ public class GoodsReviewListServiceimpl implements  GoodsReviewListService{
 
     @Override
     public List<GoodsReviewList> getGoodsReviewList(int goodsId, String orderBy, int pageNo, int pageSize) {
-        int offset = (pageNo - 1) * pageSize;
-        return goodsReviewListMapper.getGoodsReviewList(goodsId, orderBy, offset, pageSize);
+ 
+        return goodsReviewListMapper.getGoodsReviewList(goodsId, orderBy, pageNo, pageSize);
     }
 
     @Override
