@@ -22,13 +22,13 @@ import ltd.newbee.mall.service.GoodsReviewDetailService;
 public class GoodsReviewDetailController {
     @Autowired
     private GoodsReviewDetailService goodsReviewDetailService;
-
+    //获取商品id的所有评价信息
     @GetMapping("/{goodsId}")
     public ResponseEntity<List<GoodsReviewDetail>> getGoodsReviewsByGoodsId(@PathVariable Integer goodsId) {
         List<GoodsReviewDetail> goodsReviews = goodsReviewDetailService.getGoodsReviewsByGoodsId(goodsId);
         return new ResponseEntity<>(goodsReviews, HttpStatus.OK);
     }
-
+    //http://localhost:28089/review-detail/ 可以插入信息。
     @PostMapping("/")
     public ResponseEntity<String> addGoodsReviewDetail(@RequestBody GoodsReviewDetail reviewDetail) {
         try {

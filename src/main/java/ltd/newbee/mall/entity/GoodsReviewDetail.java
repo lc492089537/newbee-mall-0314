@@ -1,7 +1,7 @@
 package ltd.newbee.mall.entity;
 
 public class GoodsReviewDetail {
-    private String reviewId;
+    private Integer reviewId;
     private Integer goodsId;
     private String goodsName;
     private Integer reviewRank;
@@ -11,13 +11,13 @@ public class GoodsReviewDetail {
 	/**
 	 * @return the reviewId
 	 */
-	public String getReviewId() {
+	public Integer getReviewId() {
 		return reviewId;
 	}
 	/**
 	 * @param reviewId the reviewId to set
 	 */
-	public void setReviewId(String reviewId) {
+	public void setReviewId(Integer reviewId) {
 		this.reviewId = reviewId;
 	}
 	/**

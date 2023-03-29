@@ -12,15 +12,16 @@
 	</resultMap>
 	<!-- 获取商品评价列表 -->
 	<select id="getGoodsReviewsByGoodsId" resultMap="GoodsReviewDetailMapper">
-    select goods_id,
-           review_id,
-           goods_name,
-           review_rank,
-           nickname,
-           review_title,
-           review_content
-    from review_detail
-    where goods_id = #{goodsId}
+    select t.goods_id,
+           t.review_id,
+           t.goods_name,
+           t.review_rank,
+           t.nickname,
+           t.review_title,
+           t.review_content
+    from review_detail as t
+    left join review_table as g on t.goods_id = g.goods_id and t.review_id = g.review_id
+    where t.goods_id = #{goodsId}
 	</select>
 	<!-- 插入商品评价 -->
 	<insert id="insertGoodsReviewDetail" parameterType="ltd.newbee.mall.entity.GoodsReviewDetail">
