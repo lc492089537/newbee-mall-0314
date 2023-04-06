@@ -28,7 +28,6 @@
         ELSE g.question_date 
     END DESC,
     g.question_id ASC
-
 	LIMIT #{offset}, #{pageSize}
 
    

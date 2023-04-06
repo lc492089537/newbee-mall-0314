@@ -14,7 +14,7 @@
 	<select id="getGoodsReviewsByGoodsId" resultMap="GoodsReviewDetailMapper">
     select t.goods_id,
            t.review_id,
-           t.goods_name,
+           g.goods_name,
            t.review_rank,
            t.nickname,
            t.review_title,

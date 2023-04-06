@@ -29,7 +29,7 @@ public class GoodsReviewDetailController {
         return new ResponseEntity<>(goodsReviews, HttpStatus.OK);
     }
     //http://localhost:28089/review-detail/ 可以插入信息。
-    @PostMapping("/")
+    @PostMapping("/review-detail")
     public ResponseEntity<String> addGoodsReviewDetail(@RequestBody GoodsReviewDetail reviewDetail) {
         try {
             goodsReviewDetailService.addGoodsReviewDetail(reviewDetail);
