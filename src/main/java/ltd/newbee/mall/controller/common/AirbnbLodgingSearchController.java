@@ -16,11 +16,15 @@ import ltd.newbee.mall.service.AirbnbLodgingSearchService;
 public class AirbnbLodgingSearchController {
 	@Autowired
 	private AirbnbLodgingSearchService airbnbLodgingSearchService;
-	
-    @PostMapping("/filter_detail")
-    public List<AirbnbLodgingSearcheEntity> getFilterDetails(@RequestBody Map<String, Object> filterlist) {
-        return airbnbLodgingSearchService.getLodgingSearchHotelRoomInfo(filterlist);
-    }
-   
-    
+
+	@PostMapping("/filter_detail")
+	public List<AirbnbLodgingSearcheEntity> getFilterDetails(@RequestBody Map<String, Object> filterlist) {
+		return airbnbLodgingSearchService.getLodgingSearchHotelRoomInfo(filterlist);
+	}
+
+	@PostMapping("/filter_default_detail")
+	public List<AirbnbLodgingSearcheEntity> getLodgeingSearchDefaultInfo() {
+		return airbnbLodgingSearchService.getLodgeingSearchDefaultInfo();
+	}
+
 }

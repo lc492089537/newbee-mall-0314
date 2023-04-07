@@ -11,6 +11,7 @@ public class AirbnbLodgingSearcheEntity {
 	private int hotelId;
 	@JsonIgnore
 	private int roomId;
+	@JsonIgnore
 	private String roomName;
 	private String hotelImage;
 	private int totalPrice;
@@ -19,6 +20,8 @@ public class AirbnbLodgingSearcheEntity {
 	@JsonIgnore
 	private Date checkOutDate;
 	private float avgPoint;
+	@JsonIgnore
+	private double weightedScore;
 
 	/**
 	 * @return the hotelName
@@ -48,13 +51,6 @@ public class AirbnbLodgingSearcheEntity {
 		this.pricePerNight = pricePerNight;
 	}
 
-	@Override
-	public String toString() {
-		return "AirbnbLodgingSearcheEntity [hotelName=" + hotelName + ", pricePerNight=" + pricePerNight + ", hotelId="
-				+ hotelId + ", roomId=" + roomId + ", roomName=" + roomName + ", hotelImage=" + hotelImage
-				+ ", totalPrice=" + totalPrice + ", checkInDate=" + checkInDate + ", checkOutDate=" + checkOutDate
-				+ ", avgPoint=" + avgPoint + "]";
-	}
 
 	/**
 	 * @return the hotelId
@@ -128,4 +124,25 @@ public class AirbnbLodgingSearcheEntity {
 		this.totalPrice = totalPrice;
 	}
 
+	/**
+	 * @return the avgPoint
+	 */
+	public float getAvgPoint() {
+		return avgPoint;
+	}
+
+	/**
+	 * @param avgPoint the avgPoint to set
+	 */
+	public void setAvgPoint(float avgPoint) {
+		this.avgPoint = avgPoint;
+	}
+	@Override
+	public String toString() {
+		return "AirbnbLodgingSearcheEntity [hotelName=" + hotelName + ", pricePerNight=" + pricePerNight + ", hotelId="
+				+ hotelId + ", roomId=" + roomId + ", roomName=" + roomName + ", hotelImage=" + hotelImage
+				+ ", totalPrice=" + totalPrice + ", checkInDate=" + checkInDate + ", checkOutDate=" + checkOutDate
+				+ ", avgPoint=" + avgPoint + "]";
+	}
+	
 }

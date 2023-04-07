@@ -3,7 +3,6 @@
 <mapper namespace="ltd.newbee.mall.dao.AirbnbLodgingSearchMapper">
 	<resultMap id="AirbnbLodgingSearchMapper" type="ltd.newbee.mall.entity.AirbnbLodgingSearcheEntity"></resultMap>
 	<select id="getLodgingSearchHotelRoomInfo" resultMap="AirbnbLodgingSearchMapper">
-
 		SELECT 
 				hotel_room_information.hotel_id,
 				hotel_room_information.room_id,
@@ -261,5 +260,24 @@
 					and count(distinct(lodging_filter_access_bedroom.access_bedroom))>=${accessBedroom.size()}
 				</if>
 	</select>
-	
+	<select id="getLodgeingSearchDefaultInfo" resultMap="AirbnbLodgingSearchMapper ">
+			SELECT 
+				hotel_room_information.hotel_id,
+				hotel_room_information.hotel_name,
+				hotel_room_information.price_per_night,
+				GROUP_CONCAT(DISTINCT hotel_image.hotel_image SEPARATOR ',') AS hotel_image,
+				ROUND(AVG(point_clean + point_communication + point_info + point_location + point_price + point_checkin) / 6 * 0.7 
+	      			+ price_per_night / MAX(price_per_night) OVER() * 0.3, 2) AS weighted_score,
+				ROUND(AVG(point_clean + point_communication + point_info + point_location + point_price + point_checkin) / 6, 2) AS avg_point
+			FROM 
+				hotel_room_information
+			LEFT JOIN review_bnb ON hotel_room_information.hotel_id = review_bnb.hotel_id
+			JOIN hotel_image ON hotel_room_information.hotel_id = hotel_image.hotel_id
+			GROUP BY 
+				hotel_name, 
+				price_per_night,
+   		 		hotel_id
+			ORDER BY 
+				weighted_score DESC
+	</select>
 </mapper>

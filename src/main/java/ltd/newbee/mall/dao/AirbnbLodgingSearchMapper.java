@@ -7,7 +7,7 @@ import ltd.newbee.mall.entity.AirbnbLodgingSearcheEntity;
 
 public interface AirbnbLodgingSearchMapper {
 	List<AirbnbLodgingSearcheEntity> getLodgingSearchHotelRoomInfo(Map<String, Object> filterlist);
-
+	List<AirbnbLodgingSearcheEntity> getLodgeingSearchDefaultInfo();
 
 	
 }

@@ -1,5 +1,8 @@
 package ltd.newbee.mall.service.impl;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +25,16 @@ public class AirbnbLodgingSearchServiceImpl implements  AirbnbLodgingSearchServi
         List<AirbnbLodgingSearcheEntity> lodgingSearchResults = airbnbLodgingSearchMapper.getLodgingSearchHotelRoomInfo(filterlist);
         return lodgingSearchResults;
     }
+	
+
+	@Override
+	public List<AirbnbLodgingSearcheEntity> getLodgeingSearchDefaultInfo() {
+	    List<AirbnbLodgingSearcheEntity> defaultResultsOrder = airbnbLodgingSearchMapper.getLodgeingSearchDefaultInfo();
+	    return defaultResultsOrder;
+	}
+
+		 
+	
 	
 	
 
